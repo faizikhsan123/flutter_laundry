@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/pages/notification.dart';
 
 class App_history extends StatelessWidget {
   const App_history({super.key});
@@ -10,7 +11,7 @@ class App_history extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: 150,
+            height: 130,
             decoration: const BoxDecoration(
               color: Color(0xFF13BCBC),
               borderRadius: BorderRadius.only(
@@ -19,17 +20,14 @@ class App_history extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 25,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // First Row: Hi User + icons
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Laundry History",
@@ -39,34 +37,8 @@ class App_history extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      // Search and notification icons
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 1,
-                          ),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(6.0),
-                          child: Icon(
-                            Icons.notifications,
-                            size: 28,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+
+                      
                     ],
                   ),
                   const SizedBox(height: 8),

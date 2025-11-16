@@ -11,32 +11,36 @@ final List<Map<String, dynamic>> data = [
     "title": "WASH & IRON",
     "detail": "EXPRESS",
     "delivery": "Delivered on 02/08/25",
-    "color": const Color.fromARGB(255, 218, 168, 165),
-    "textc": const Color.fromARGB(255, 84, 2, 2),
+    "color": Color.fromARGB(255, 194, 255, 204),
+    "textc": Color.fromARGB(255, 0, 114, 19),
+    "image": "assets/images/haha.png",
   },
   {
     "price": "Rp. 10.000",
     "title": "DRY CLEAN",
     "detail": "24 JAM",
     "delivery": "Delivered on 02/04/25",
-    "color": const Color.fromARGB(255, 155, 226, 169),
-    "textc": const Color.fromARGB(255, 16, 105, 0),
+    "color": Color.fromARGB(255, 254, 183, 179),
+    "textc": Color.fromARGB(255, 134, 1, 3),
+    "image": "assets/images/hihi.png",
   },
   {
     "price": "Rp. 30.000",
     "title": "DRY STEAM",
     "detail": "24 JAM",
     "delivery": "Delivered on 02/01/25",
-    "color": const Color.fromARGB(255, 156, 211, 228),
-    "textc": const Color.fromARGB(255, 0, 112, 113),
+    "color": Color.fromARGB(255, 245, 165, 229),
+    "textc": Color.fromARGB(255, 53, 1, 70),
+    "image": "assets/images/hihi.png",
   },
   {
     "price": "Rp. 30.000",
     "title": "REGULAR WASH",
     "detail": "36 JAM",
     "delivery": "Delivered on 02/03/25",
-    "color": const Color.fromARGB(255, 160, 140, 226),
-    "textc": const Color.fromARGB(255, 56, 1, 114),
+    "color": Color.fromARGB(255, 136, 196, 233),
+    "textc": Color.fromARGB(255, 1, 59, 93),
+    "image": "assets/images/huhu.png",
   },
 ];
 
@@ -53,14 +57,46 @@ class History extends StatelessWidget {
             child: Column(
               children: [
                 const App_history(),
+                const SizedBox(height: 15),
+
+                // CARD WRAPPER
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(15),
                   child: Container(
                     width: double.infinity,
+                    height: 560,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromARGB(255, 165, 219, 219),
+                      color: const Color.fromARGB(255, 216, 234, 234),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 12,
+                          spreadRadius: 2,
+                          offset: Offset(0, 4),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.15),
+                          blurRadius: 12,
+                          spreadRadius: 1,
+                          offset: Offset(0, -4),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.15),
+                          blurRadius: 12,
+                          spreadRadius: 1,
+                          offset: Offset(4, 0),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.15),
+                          blurRadius: 12,
+                          spreadRadius: 1,
+                          offset: Offset(-4, 0),
+                        ),
+                      ],
                     ),
+
+                    // CARD LIST
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -74,37 +110,47 @@ class History extends StatelessWidget {
                                 BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 4,
-                                  offset: const Offset(2, 2),
+                                  offset: Offset(4, 4),
                                 ),
                               ],
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                bottom: 10,
+                                right: 10,
+                                left: 10,
+                              ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  
+                                  // IMAGE FIXED
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      "assets/images/haha.png",
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 0,
+                                        right: 0,
+                                        top: 10,
+                                      ),
+                                      child: Image.asset(
+                                        item["image"],
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.contain
+                                      ),
                                     ),
                                   ),
+
                                   const SizedBox(width: 15),
 
-                                  
-                                  
+                                  // TEXT AREA
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(top: 3),
+                                      padding: const EdgeInsets.only(top: 7),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             item["title"],
@@ -113,7 +159,7 @@ class History extends StatelessWidget {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          const SizedBox(height: 4),
+                                          const SizedBox(height: 2),
                                           Text(
                                             item["price"],
                                             style: const TextStyle(
@@ -121,7 +167,7 @@ class History extends StatelessWidget {
                                               color: Colors.black87,
                                             ),
                                           ),
-                                          const SizedBox(height: 4),
+                                          const SizedBox(height: 2),
                                           Text(
                                             item["delivery"],
                                             style: const TextStyle(
@@ -134,10 +180,12 @@ class History extends StatelessWidget {
                                     ),
                                   ),
 
-                                  
+                                  // STATUS BADGE
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 4),
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: item["color"],
                                       borderRadius: BorderRadius.circular(8),

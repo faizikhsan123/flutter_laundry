@@ -1,329 +1,174 @@
 import 'package:flutter/material.dart';
-
-// peta
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:laundry/controller/regis_controller.dart';
+import 'package:laundry/custom/custom_awal.dart';
+import 'package:laundry/custom/custom_input.dart';
 import 'package:laundry/pages/login.dart';
-
-void main() {
-  runApp(Regis());
-}
 
 class Regis extends StatelessWidget {
   const Regis({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color(0xFF13BCBC),
-        // appBar: AppBar(
-        //   backgroundColor: Colors.blueGrey,
-        //   leading: GestureDetector(
-        //     child: Icon(Icons.arrow_back, color: Colors.white),
-        //     onTap: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        // ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/Logo.png", width: 120),
-                        const SizedBox(width: 20),
-                        const Expanded(
-                          child: Column(
-                            children: [
-                              SizedBox(height: 65),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Athose",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(221, 142, 136, 136),
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    "Laundry",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color(0xFF13BCBC),
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                "E X P R E S S ",
-                                style: TextStyle(
-                                  letterSpacing: 7,
+    final controller = RegisController();
 
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                ),
+    return Scaffold(
+      backgroundColor: const Color(0xFF13BCBC),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              // HEADER
+              CustomAwal(),
+
+              const SizedBox(height: 30),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
+                child: CustomInput(
+                  label: "Masukkan Username",
+                  prefixIcon: Icons.person,
+                  controller: controller.usernameC,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
+                child: CustomInput(
+                  label: "Masukkan Email",
+                  prefixIcon: Icons.email,
+                  controller: controller.emailC,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
+                child: CustomInput(
+                  label: "Masukkan Password",
+                  prefixIcon: Icons.key,
+                  controller: controller.passC,
+                  obscureText: true,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
+                child: CustomInput(
+                  label: "Masukkan Mobile Number",
+                  prefixIcon: Icons.call,
+                  controller: controller.phoneC,
+                ),
+              ),
+
+              // ===== BAGIAN ALAMAT DENGAN PETA =====
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
+                child: CustomInput(
+                  label: "Alamat Anda",
+                  prefixIcon: Icons.location_city,
+                  controller: controller.addressC,
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 10,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 200,
+                    child: FlutterMap(
+                      options: MapOptions(
+                        initialCenter: const LatLng(
+                          -7.2827,
+                          112.7949,
+                        ), // Keputih
+                        initialZoom: 15,
+                      ),
+                      children: [
+                        // Layer peta
+                        TileLayer(
+                          urlTemplate:
+                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          subdomains: const ['a', 'b', 'c'],
+                        ),
+
+                        // Marker lokasi
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: const LatLng(-7.2827, 112.7949),
+                              width: 60,
+                              height: 60,
+                              child: const Icon(
+                                Icons.location_pin,
+                                color: Colors.red,
+                                size: 40,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
+              ),
 
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 50,
-                    bottom: 10,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 239, 239, 238),
-                    ),
-                    child: TextField(
-                      // controller: emailC,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "Masukkan Username",
-                        prefixIcon: const Icon(Icons.person),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 239, 239, 238),
-                    ),
-                    child: TextField(
-                      // controller: emailC,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "Masukkan Email",
-                        prefixIcon: const Icon(Icons.email),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 239, 239, 238),
-                    ),
-                    child: TextField(
-                      // controller: emailC,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "Masukkan Mobile Number",
-                        prefixIcon: const Icon(Icons.call),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-               padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 239, 239, 238),
-                    ),
-                    child: TextField(
-                      // controller: emailC,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "Masukkan Address",
-                        prefixIcon: const Icon(Icons.location_city),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              const SizedBox(height: 20),
 
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: FlutterMap(
-                        options: MapOptions(
-                          initialCenter: LatLng(
-                            -7.2827,
-                            112.7949,
-                          ), // Keputih, Surabaya
-                          initialZoom:
-                              15, // lebih dekat biar jelas area Keputih
-                        ),
-                        children: [
-                          // Layer peta dari OpenStreetMap
-                          TileLayer(
-                            urlTemplate:
-                                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            subdomains: const ['a', 'b', 'c'],
-                          ),
-                          // Marker lokasi Keputih
-                          MarkerLayer(
-                            markers: [
-                              Marker(
-                                point: LatLng(-7.2827, 112.7949),
-                                child: const Icon(
-                                  Icons.location_pin,
-                                  color: Colors.red,
-                                  size: 40,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+              // ===== BUTTON REGISTER =====
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 10,
+                ),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await controller.register(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 49, 64, 71),
+                    fixedSize: const Size(double.maxFinite, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20,),
-
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    top: 10,
-                    bottom: 10,
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
+                ),
+              ),
+
+              // ===== LOGIN LINK =====
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(12)
-                      ),
-                     backgroundColor: Colors.blueGrey,
-                      fixedSize: const Size(double.maxFinite, 20),
-                    ),
                     child: const Text(
-                      "Register",
-                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18),
+                      " Login Now!",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 49, 64, 71),
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account?",
-                      style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255), fontSize: 16),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        " Login Now!",
-                        style: TextStyle(
-                          color: Colors.blueGrey[900],
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+              const SizedBox(height: 30),
+            ],
           ),
         ),
       ),

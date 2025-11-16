@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/pages/notification.dart';
 
 class App_home extends StatelessWidget {
   const App_home({super.key});
@@ -10,7 +11,7 @@ class App_home extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: 150,
+            height: 130,
             decoration: const BoxDecoration(
               color: Color(0xFF13BCBC),
               borderRadius: BorderRadius.only(
@@ -19,16 +20,12 @@ class App_home extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 25,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                
+
                 children: [
-                  // First Row: Hi User + icons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -38,7 +35,7 @@ class App_home extends StatelessWidget {
                             "Hi,",
                             style: TextStyle(
                               fontSize: 32,
-                              color: Color.fromARGB(255, 135, 132, 132),
+                              color: Color.fromARGB(255, 197, 193, 193),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -57,16 +54,13 @@ class App_home extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // Search and notification icons
+
                       Row(
                         children: [
                           Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1,
-                              ),
+                              border: Border.all(color: Colors.white, width: 1),
                             ),
                             child: const Padding(
                               padding: EdgeInsets.all(6.0),
@@ -78,20 +72,30 @@ class App_home extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => notificate(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(6.0),
-                              child: Icon(
-                                Icons.notifications,
-                                size: 28,
-                                color: Colors.white,
+                              child: const Padding(
+                                padding: EdgeInsets.all(6.0),
+                                child: Icon(
+                                  Icons.notifications,
+                                  size: 28,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -99,15 +103,15 @@ class App_home extends StatelessWidget {
                       ),
                     ],
                   ),
-                 
-                  // Text below
+
                   Padding(
-                    padding: const EdgeInsets.only(left: 30,top: 1),
+                    padding: const EdgeInsets.only(left: 10, top: 1),
                     child: const Text(
                       "Welcome to Athose Laundry",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
+                  
                 ],
               ),
             ),
