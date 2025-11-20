@@ -51,7 +51,7 @@ class CustomScheduleOrder extends StatelessWidget {
               const SizedBox(width: 20,),
       
               Text(
-                label,
+                label,    
                 style: TextStyle(
                   fontSize: 28,
                   color: Color.fromARGB(255, 255, 255, 255),

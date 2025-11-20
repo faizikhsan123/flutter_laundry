@@ -5,15 +5,10 @@ import 'package:laundry/custom/custom_schedule_order.dart';
 import 'package:laundry/pages/dashboard.dart';
 import 'package:laundry/pages/home.dart';
 
-class Order extends StatefulWidget {
+class Order extends StatelessWidget {
   Order({super.key});
 
-  @override
-  State<Order> createState() => _OrderState();
-}
 
-class _OrderState extends State<Order> {
-  final jobRoleCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

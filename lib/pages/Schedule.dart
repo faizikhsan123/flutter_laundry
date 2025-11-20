@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:laundry/custom/custom_button.dart';
 import 'package:laundry/custom/custom_input.dart';
-import 'package:laundry/custom/custom_input2.dart';
 import 'package:laundry/custom/custom_schedule_order.dart';
 import 'package:laundry/pages/Order.dart';
 
 class Schedule extends StatefulWidget {
-  const Schedule({super.key});
-
   @override
   State<Schedule> createState() => _ScheduleState();
 }
@@ -24,7 +21,7 @@ class _ScheduleState extends State<Schedule> {
           child: Column(
             children: [
               CustomScheduleOrder(label: "Collection & Delivery"),
-                SizedBox(height: 20),
+              SizedBox(height: 20),
 
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -90,14 +87,14 @@ class _ScheduleState extends State<Schedule> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: CustomInput2(
+                              child: CustomInput(
                                 label: "Today",
                                 prefixIcon: Icons.calendar_month,
                               ),
                             ),
                             const SizedBox(width: 20),
                             Expanded(
-                              child: CustomInput2(
+                              child: CustomInput(
                                 label: "11:00 AM",
                                 prefixIcon: Icons.timelapse_sharp,
                               ),
@@ -140,14 +137,14 @@ class _ScheduleState extends State<Schedule> {
                         child: Row(
                           children: const [
                             Expanded(
-                              child: CustomInput2(
+                              child: CustomInput(
                                 label: "Today",
                                 prefixIcon: Icons.calendar_month,
                               ),
                             ),
                             const SizedBox(width: 20),
                             Expanded(
-                              child: CustomInput2(
+                              child: CustomInput(
                                 label: "11:00 AM",
                                 prefixIcon: Icons.timelapse,
                               ),
@@ -253,7 +250,12 @@ class _ScheduleState extends State<Schedule> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 0,left: 40,right: 40,bottom: 20),
+                padding: const EdgeInsets.only(
+                  top: 0,
+                  left: 40,
+                  right: 40,
+                  bottom: 20,
+                ),
                 child: CustomButton(label: "NEXT", destination: Order()),
               ),
             ],
